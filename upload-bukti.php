@@ -1,10 +1,15 @@
-<?php 
+<?php
 session_start();
-require('./app/database/db.php');
+include("./app/database/db.php");
+if (!isset($_SESSION["user"])) {
+  echo "<script>location='./login.php'</script>";
+} 
+$id_user = $_SESSION['user']['id_user'];
+$profil = mysqli_query($conn, "SELECT * FROM user WHERE id_user = $id_user");
+$p = mysqli_fetch_array($profil);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +17,7 @@ require('./app/database/db.php');
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Home</title>
+	<title>profil</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -37,82 +42,93 @@ require('./app/database/db.php');
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
 </head>
-
 <body>
-
+	
 	<!--PreLoader-->
-	<div class="loader">
-		<div class="loader-inner">
-			<div class="circle"></div>
-		</div>
-	</div>
-	<!--PreLoader Ends-->
-
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+	
 	<!-- header -->
 	<?php include('./include/nav.php') ?>
 	
 	<!-- end header -->
-
-	<!-- hero area -->
-	<div class="hero-area hero-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-9 offset-lg-2 text-center">
-					<div class="hero-text">
-						<div class="hero-text-tablecell">
-							<p class="subtitle">Welcome To</p>
-							<h1>PUDDY LOVA</h1>
-							<div class="hero-btns">
-								<a href="produk.php" class="bordered-btn">List Produk</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end hero area -->
-	<!-- end features list section -->
-
-	<!-- product section -->
-	<div class="product-section mt-150 mb-150">
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3><span class="orange-text">Produk</span> Teratas</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					<div class="breadcrumb-text">
+						<h1>Upload Bukti Pembayaran</h1>
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
-			<?php 
-				$produk = mysqli_query($conn, "SELECT * FROM produk LIMIT 3");
-				while ($p = mysqli_fetch_array($produk)) {
-			?>
-			<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<img src="app/admin/foto/<?= $p['gambar'] ?>" alt="">
-						</div>
-						<h3><?php echo $p['nama_produk'] ?></h3>
-						<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
-						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Detail</a>
-					</div>
-				</div>
-				</a>
-			<?php } ?>
-				
 			</div>
 		</div>
 	</div>
-	<!-- footer -->
+	<!-- end breadcrumb section -->
+
+	<!-- contact form -->
+	<div class="contact-from-section mt-100 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 mb-5 mb-lg-0">
+					<div class="form-title">
+						<h2>Upload Bukti Pembayaran</h2>
+					</div>
+				 	<div id="form_status"></div>
+					<div class="contact-form">
+						<form method="POST" enctype="multipart/form-data">
+							<input type="file" name="foto" required>
+							<input type="submit" class="cart-btn btn-sm" name="submit" value="Upload Bukti Pembayaran">
+						</form>
+						<?php
+              if (isset($_POST['submit'])) {
+				$id_keranjang = $_GET['id_keranjang'];
+				$status = 'sudah bayar';
+
+                $filename1 = $_FILES['foto']['name'];
+				$tmp_name1 = $_FILES['foto']['tmp_name'];
+				$ukuran1 = $_FILES['foto']['size'];
+				$type1 = explode('.', $filename1);
+				$type2 = $type1[1];
+				$newname1 = 'f' . time() . '.' . $type2;
+				$tipe_diizinkan = array('jpg', 'jpeg', 'png', '');
+
+				$dest = "./foto/" . $_FILES['foto']['name'];
+				move_uploaded_file($tmp_name1, './foto/' . $newname1);
+
+                $update = mysqli_query($conn, "UPDATE keranjang SET
+                           riwayat = '$status',
+						   bukti_transfer = '$newname1'
+                           WHERE id_keranjang = '$id_keranjang'");
+                if ($update) {
+              ?>
+              <?php
+                  echo
+                  '<script>
+                  window.location="riwayat-transaksi.php";
+                  alert("pembayaran berhasil");
+                  </script>';
+                } else {
+                  echo 'gagal ' . mysqli_error($conn);
+                }
+              }
+              ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end contact form -->
+
+
 	<?php include('./include/footer.php') ?>
 	
 	<!-- end copyright -->
-
+	
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
@@ -131,9 +147,10 @@ require('./app/database/db.php');
 	<script src="assets/js/jquery.meanmenu.min.js"></script>
 	<!-- sticker js -->
 	<script src="assets/js/sticker.js"></script>
+	<!-- form validation js -->
+	<script src="assets/js/form-validate.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
-
+	
 </body>
-
 </html>

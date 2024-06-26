@@ -47,22 +47,24 @@ if (!isset($_SESSION["admin"])) {
                     <th>Waktu</th>
                     <th>Promo</th>
                     <th>Status</th>
+                    <th>Bukti Transfer</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $no = 1;
-                  $get_paket = mysqli_query($conn, "SELECT * FROM transaksi");
-                  while ($p = mysqli_fetch_array($get_paket)) {
+                  $produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk LEFT JOIN user ON keranjang.id_user = user.id_user");
+                  while ($p = mysqli_fetch_array($produk)) {
                   ?>
                     <tr style="font-size: 16px;" id="klik-tabel">
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['produk']; ?></td>
+                      <td><?php echo $p['nama_produk']; ?></td>
                       <td><?php echo $p['tanggal']; ?></td>
                       <td><?php echo $p['waktu']; ?></td>
                       <td><?php echo $p['promo']; ?>%</td>
-                      <td><?php echo $p['status']; ?></td>
+                      <td><?php echo $p['riwayat']; ?></td>
+                      <td><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt=""></td>
                     </tr>
                   <?php } ?>
                 </tbody>

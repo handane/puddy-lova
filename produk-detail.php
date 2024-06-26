@@ -1,10 +1,10 @@
 <?php
 session_start();
 include("./app/database/db.php");
-// if (!isset($_SESSION["user"])) {
-//   echo "<script>location='./login.php'</script>";
-// } 
-// $id_user = $_SESSION["user"]['id_user'];
+if (!isset($_SESSION["user"])) {
+  echo "<script>location='./login.php'</script>";
+} 
+$id_user = $_SESSION["user"]['id_user'];
 $id_produk = $_GET['id_produk'];
 $produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.id_produk = $id_produk");
 $p = mysqli_fetch_array($produk);
@@ -75,7 +75,7 @@ $p = mysqli_fetch_array($produk);
 	<!-- single product -->
 	<div class="single-product mt-150 mb-150">
 		<div class="container">
-			<form action="checkout.php" method="GET">
+			<form action="post-keranjang.php" method="POST">
 				<div class="row">
 					<div class="col-md-5">
 						<div class="single-product-img">
@@ -89,12 +89,17 @@ $p = mysqli_fetch_array($produk);
 							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p> -->
 							<div class="single-product-form">
 								<p><strong>Promo: </strong><?php echo $p['promo'] ?>%</p>
+								<p><strong>Stok: </strong><?php echo $p['stok_produk'] ?></p>
 								<p><strong>Jumlah</strong></p>
-								<input type="number" name="jumlah" placeholder="1">
+								<input type="number" name="jumlah" value="1">
 							</div>
 							<h4></h4>
 							<input type="hidden" name="id_produk" value="<?= $id_produk ?>">
-							<input type="submit" name="beli" value="Checkout" class="cart-btn">
+							<input type="hidden" name="id_user" value="<?= $id_user ?>">
+							<!-- <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a> -->
+							<!-- <a href="post-keranjang.php?id_produk=<?= $id_produk ?>&id_user=<?= $id_user ?>" class="cart-btn"><i class="fas fa-shopping-cart"></i></a> -->
+							<!-- <input type="submit" name="beli" value="Checkout" class="cart-btn"> -->
+							<button type="submit" name="keranjang" class="cart-btn"><i class="fas fa-shopping-cart"></i> Masukkan Keranjang</button>
 						</div>
 					</div>
 				</div>

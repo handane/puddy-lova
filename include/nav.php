@@ -19,6 +19,7 @@
 								<li><a href="produk.php">Produk</a>
 								</li>
                                 <li><a href="kritik.php">Kritik</a>
+								<li><a href="riwayat-transaksi.php">Riwayat</a>
                                 <li><a href="profil.php">Profil</a>
 								</li>
                                     <?php if(!isset($_SESSION['user'])){ ?>

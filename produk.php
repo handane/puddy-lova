@@ -72,7 +72,7 @@ require('./app/database/db.php');
 		<div class="container">
 		<div class="row">
 			<?php 
-				$produk = mysqli_query($conn, "SELECT * FROM produk");
+				$produk = mysqli_query($conn, "SELECT * FROM produk WHERE stok_produk > 0");
 				while ($p = mysqli_fetch_array($produk)) {
 			?>
 			<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>">

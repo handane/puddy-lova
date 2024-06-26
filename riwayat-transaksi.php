@@ -6,9 +6,10 @@ if (!isset($_SESSION["user"])) {
   echo "<script>location='./login.php'</script>";
 } 
 $id_user = $_SESSION["user"]['id_user'];
-$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'belum checkout'");
+$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'menunggu pembayaran' OR keranjang.riwayat = 'sudah bayar'");
 $row = mysqli_num_rows($produk);
 if ($row < 1) {
+	echo '<script>alert("Belum ada riwayat transaksi")</script>';
 	echo "<script>location='./produk.php'</script>";
   } 
 ?>
@@ -62,8 +63,8 @@ if ($row < 1) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Keranjang</p>
-						<h1>Checkout</h1>
+						<p>Transaksi</p>
+						<h1>Riwayat Pembelian</h1>
 					</div>
 				</div>
 			</div>
@@ -76,16 +77,20 @@ if ($row < 1) {
 		<div class="container">
 		<form action="" method="POST">
 			<div class="row">
-				<div class="col-lg-8 col-md-12">
+				<div class="col-lg-12 col-md-12">
 					<div class="cart-table-wrap">
 						<table class="cart-table">
 							<thead class="cart-table-head">
 								<tr class="table-head-row">
-									<th class="product-image"></th>
-									<th class="product-image">Product Image</th>
-									<th class="product-name">Name</th>
-									<th class="product-price">Price</th>
-									<th class="product-quantity">Quantity</th>
+									<th class="product-image">Hapus</th>
+									<th class="product-image">Konfirmasi</th>
+									<th class="product-image">Status</th>
+									<th class="product-image">Gambar</th>
+									<th class="product-name">Nama</th>
+									<th class="product-quantity">Tanggal</th>
+									<th class="product-quantity">Waktu</th>
+									<th class="product-price">Harga</th>
+									<th class="product-quantity">Jumlah</th>
 									<th class="product-total">Total</th>
 								</tr>
 							</thead>
@@ -93,13 +98,22 @@ if ($row < 1) {
 								<?php $array = []; ?>
 								
 								<?php while($p = mysqli_fetch_array($produk)) { ?>
-								
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="delete.php?id_keranjang=<?= $p['id_keranjang'] ?>"><i class="far fa-window-close"></i></a></td>
 									<input type="hidden" name="nama" value="<?= $_SESSION['user']['nama'] ?>">
 									<input type="hidden" name="promo" value="<?= $p['promo'] ?>">
+								<tr class="table-body-row">
+									<td class="product-remove"><a href="delete.php?id_keranjang_transaksi=<?= $p['id_keranjang'] ?>"><i class="far fa-window-close"></i></a></td>
+									<?php 
+										if($p['riwayat'] == 'menunggu pembayaran'){
+									?>
+										<td><a  class="cart-btn btn btn-sm" href="upload-bukti.php?id_keranjang=<?= $p['id_keranjang'] ?>"><i class="fas fa-money-bill-wave"></i> Upload</a></td>
+									<?php }else{ ?>
+										<td>Lunas</td>
+									<?php } ?>
+									<td class="product-name"><i><?= $p['riwayat'] ?></i></td>
 									<td class="product-image"><img src="./app/admin/foto/<?= $p['gambar'] ?>" alt=""></td>
 									<td class="product-name"><?= $p['nama_produk'] ?><input type="hidden" name="produk" value="<?= $p['nama_produk'] ?>"></td>
+									<td class="product-name"><?= $p['tanggal'] ?></td>
+									<td class="product-name"><?= $p['waktu'] ?></td>
 									<td class="product-price">Rp. <?php echo number_format($p['harga']) ?></td>
 									<td class="product-quantity"><?php echo $p['jumlah'] ?><input type="hidden" name="jumlah" value="<?php echo $p['jumlah'] ?>"></td>
 									<td class="product-total">Rp <?php echo number_format($p['total']) ?></td>
@@ -113,45 +127,16 @@ if ($row < 1) {
 						</table>
 					</div>
 				</div>
-
-				<div class="col-lg-4">
-					<div class="total-section">
-						<table class="total-table">
-							<thead class="total-table-head">
-								<tr class="table-total-row">
-									<th>Total</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="total-data">
-									<td><strong>Biaya Pengiriman: </strong></td>
-									<td>Rp. 15.000</td>
-								</tr>
-								<tr class="total-data">
-									<?php 
-										$total_akhir = array_sum($array);
-									?>
-									<td><strong>Total: </strong></td>
-									<td>Rp <?php echo number_format($total_akhir) ?><input type="hidden" name="total" value="<?php echo number_format($total_akhir) ?>"></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="cart-buttons">
-							<input type="submit" name="beli" class="cart-btn" value="Checkout">
-						</div>
-					</div>
-				</div>
 			</div>
 		</form>
-		<?php
+			<?php
                 if (isset($_POST["beli"])) {
                   $nama = $_POST['nama'];
                   $produk = $_POST['produk'];
                   $tanggal = date('d-m-Y');
                   $waktu = date('h:m');
                   $promo = $_POST['promo'];
-                  $status = 'menunggu pembayaran';
+                  $status = 'selesai';
 
                   $get_regist = mysqli_query($conn, "INSERT INTO transaksi VALUE(
                                 null,
@@ -170,7 +155,7 @@ if ($row < 1) {
 					WHERE id_user = '$id_user'");
                     if ($get_regist) {
                       echo '<script>alert("pembelian berhasil")</script>';
-					  echo '<script>window.location="riwayat-transaksi.php"</script>';
+					  echo '<script>window.location="produk.php"</script>';
                     } else {
                       echo '<script>alert("pembelian gagal")</script>';
                     }

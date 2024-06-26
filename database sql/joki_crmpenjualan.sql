@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2024 at 07:50 PM
+-- Generation Time: Jun 26, 2024 at 09:14 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -50,8 +50,23 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`, `name`) VALUES
 CREATE TABLE `keranjang` (
   `id_keranjang` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `total` int(55) NOT NULL,
+  `riwayat` varchar(55) NOT NULL,
+  `tanggal` varchar(55) NOT NULL,
+  `waktu` varchar(55) NOT NULL,
+  `bukti_transfer` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_user`, `jumlah`, `total`, `riwayat`, `tanggal`, `waktu`, `bukti_transfer`) VALUES
+(34, 5, 3, 3, 666, 'menunggu pembayaran', '26-06-2024', '09:06', 'f1719385945.51'),
+(35, 3, 3, 4, 355556, 'sudah bayar', '26-06-2024', '09:06', 'f1719385999.jpg'),
+(36, 5, 3, 1, 222, 'menunggu pembayaran', '26-06-2024', '09:06', '');
 
 -- --------------------------------------------------------
 
@@ -127,6 +142,23 @@ CREATE TABLE `transaksi` (
   `promo` varchar(11) NOT NULL,
   `status` varchar(111) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `nama`, `produk`, `tanggal`, `waktu`, `promo`, `status`) VALUES
+(8, 'josua', 'asbak', '26-06-2024', '06:06', '', 'selesai'),
+(9, 'josua', 'asbak', '26-06-2024', '07:06', '', 'selesai'),
+(10, 'josua', 'asbak', '26-06-2024', '07:06', '', 'selesai'),
+(11, 'josua', 'asbak', '26-06-2024', '07:06', '', 'selesai'),
+(12, 'josua', 'kotak', '26-06-2024', '07:06', '44', 'selesai'),
+(13, 'josua', 'kotak', '26-06-2024', '07:06', '44', 'selesai'),
+(14, 'josua', 'asbak', '26-06-2024', '08:06', '', 'selesai'),
+(15, 'josua', 'asbak', '26-06-2024', '08:06', '', 'menunggu pembayaran'),
+(16, 'josua', 'kotak', '26-06-2024', '08:06', '44', 'menunggu pembayaran'),
+(17, 'josua', 'asbak', '26-06-2024', '09:06', '', 'menunggu pembayaran'),
+(18, 'josua', 'asbak', '26-06-2024', '09:06', '', 'menunggu pembayaran');
 
 -- --------------------------------------------------------
 
@@ -209,7 +241,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `kritik_saran`
@@ -233,7 +265,7 @@ ALTER TABLE `promosi`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -465,8 +465,10 @@ a.read-more-btn:hover {
 
 a.boxed-btn,
 a.bordered-btn,
-a.cart-btn {
+a.cart-btn,
+button.cart-btn {
   border-radius: 50px;
+  border: none;
 }
 
 .section-title h3 {
@@ -1278,7 +1280,8 @@ a.cart-btn {
   transition: 0.3s;
 }
 
-a.cart-btn:hover {
+a.cart-btn:hover,
+button.cart-btn:hover {
   background-color: #051922;
   color: #ff4fe2;
 }
@@ -2478,6 +2481,14 @@ p.product-price span {
 }
 
 a.cart-btn {
+  font-family: "Poppins", sans-serif;
+  display: inline-block;
+  background-color: #ff4fe2;
+  color: #fff;
+  padding: 10px 20px;
+}
+input.cart-btn,
+button.cart-btn {
   font-family: "Poppins", sans-serif;
   display: inline-block;
   background-color: #ff4fe2;

@@ -1,16 +1,12 @@
 <?php
-error_reporting(0);
 session_start();
 include("./app/database/db.php");
 if (!isset($_SESSION["user"])) {
   echo "<script>location='./login.php'</script>";
 } 
 $id_user = $_SESSION["user"]['id_user'];
-$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'belum checkout'");
+$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user");
 $row = mysqli_num_rows($produk);
-if ($row < 1) {
-	echo "<script>location='./produk.php'</script>";
-  } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +17,7 @@ if ($row < 1) {
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Produk</title>
+	<title>keranjang</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -49,6 +45,11 @@ if ($row < 1) {
 <body>
 	
 	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
     <!--PreLoader Ends-->
 	
 	<!-- header -->
@@ -62,8 +63,8 @@ if ($row < 1) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Keranjang</p>
-						<h1>Checkout</h1>
+						<p>Puddy Lova</p>
+						<h1>Keranjang</h1>
 					</div>
 				</div>
 			</div>
@@ -90,25 +91,22 @@ if ($row < 1) {
 								</tr>
 							</thead>
 							<tbody>
-								<?php $array = []; ?>
-								
-								<?php while($p = mysqli_fetch_array($produk)) { ?>
-								
 								<tr class="table-body-row">
-									<td class="product-remove"><a href="delete.php?id_keranjang=<?= $p['id_keranjang'] ?>"><i class="far fa-window-close"></i></a></td>
+									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
 									<input type="hidden" name="nama" value="<?= $_SESSION['user']['nama'] ?>">
 									<input type="hidden" name="promo" value="<?= $p['promo'] ?>">
 									<td class="product-image"><img src="./app/admin/foto/<?= $p['gambar'] ?>" alt=""></td>
 									<td class="product-name"><?= $p['nama_produk'] ?><input type="hidden" name="produk" value="<?= $p['nama_produk'] ?>"></td>
 									<td class="product-price">Rp. <?php echo number_format($p['harga']) ?></td>
-									<td class="product-quantity"><?php echo $p['jumlah'] ?><input type="hidden" name="jumlah" value="<?php echo $p['jumlah'] ?>"></td>
-									<td class="product-total">Rp <?php echo number_format($p['total']) ?></td>
+									<td class="product-quantity"><?php echo $_GET['jumlah'] ?><input type="hidden" name="jumlah" value="<?php echo $_GET['jumlah'] ?>"></td>
+									
 									<?php 
-										$total = $p['total'];
-										array_push($array, $total );
+										$harga = $p['harga'];
+										$total = $_GET['jumlah'] * $harga;
+										$total_akhir = $total + 15000;
 									?>
+									<td class="product-total">Rp <?php echo number_format($total) ?></td>
 								</tr>
-								<?php } ?>
 							</tbody>
 						</table>
 					</div>
@@ -129,16 +127,13 @@ if ($row < 1) {
 									<td>Rp. 15.000</td>
 								</tr>
 								<tr class="total-data">
-									<?php 
-										$total_akhir = array_sum($array);
-									?>
 									<td><strong>Total: </strong></td>
 									<td>Rp <?php echo number_format($total_akhir) ?><input type="hidden" name="total" value="<?php echo number_format($total_akhir) ?>"></td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="cart-buttons">
-							<input type="submit" name="beli" class="cart-btn" value="Checkout">
+							<input type="submit" name="beli" class="btn btn-sm boxed-btn black" value="Checkout">
 						</div>
 					</div>
 				</div>
@@ -151,7 +146,7 @@ if ($row < 1) {
                   $tanggal = date('d-m-Y');
                   $waktu = date('h:m');
                   $promo = $_POST['promo'];
-                  $status = 'menunggu pembayaran';
+                  $status = 'selesai';
 
                   $get_regist = mysqli_query($conn, "INSERT INTO transaksi VALUE(
                                 null,
@@ -162,15 +157,9 @@ if ($row < 1) {
                                 '" . $promo . "',
                                 '" . $status . "'
                             )");
-
-					$update = mysqli_query($conn, "UPDATE keranjang SET
-					riwayat = '$status',
-					tanggal = '$tanggal',
-					waktu = '$waktu'
-					WHERE id_user = '$id_user'");
                     if ($get_regist) {
                       echo '<script>alert("pembelian berhasil")</script>';
-					  echo '<script>window.location="riwayat-transaksi.php"</script>';
+					  echo '<script>window.location="produk.php"</script>';
                     } else {
                       echo '<script>alert("pembelian gagal")</script>';
                     }
