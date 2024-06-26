@@ -44,6 +44,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Nama</th>
                     <th>Tanggal</th>
                     <th>Isi Kritik Saran</th>
+                    <th>Balasan</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -57,7 +58,8 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $p['nama']; ?></td>
                       <td><?php echo $p['tanggal']; ?></td>
-                      <td><?php echo substr($p['isi_kritik_saran'], 0, 20); ?></td>
+                      <td><?php echo substr($p['isi_kritik_saran'], 0, 25); ?></td>
+                      <td><?php echo substr($p['balasan'], 0, 25); ?></td>
                       <td>
                         <a class="btn btn-sm btn-warning" href="detail-kritik-saran.php?id_kritik_saran=<?php echo $p['id_kritik_saran'] ?>">Detail</a>
                         <a class="btn btn-sm btn-primary" href="balas-kritik-saran.php?id_kritik_saran=<?php echo $p['id_kritik_saran'] ?>">Balas</a>

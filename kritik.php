@@ -1,9 +1,9 @@
 <?php
 session_start();
 include("./app/database/db.php");
-// if (!isset($_SESSION["user"])) {
-//   echo "<script>location='./login.php'</script>";
-// }
+if (!isset($_SESSION["user"])) {
+  echo "<script>location='./login.php'</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +38,19 @@ include("./app/database/db.php");
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+	<style>
+		table, tr, th, td {
+			color: white;
+			border: 1px solid white;
+			text-indent: 10px;
+			padding: 10px;
+		}
+		table {
+			width: 100%;
+			margin-bottom: 100px;
+		}
+	</style>
+
 </head>
 <body>
 	
@@ -68,7 +81,7 @@ include("./app/database/db.php");
 	<!-- end breadcrumb section -->
 
 	<!-- contact form -->
-	<div class="contact-from-section mt-150 mb-150">
+	<div class="contact-from-section mt-150 mb-4">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 mb-5 mb-lg-0">
@@ -87,6 +100,7 @@ include("./app/database/db.php");
 						</form>
 						<?php
                 if (isset($_POST["kirim"])) {
+					$id_user = $_SESSION['user']['id_user'];
                   $nama = $_POST['nama'];
                   $tanggal = date('d-m-Y');
 				  $isi = $_POST['isi'];
@@ -94,6 +108,7 @@ include("./app/database/db.php");
 
                   $get_regist = mysqli_query($conn, "INSERT INTO kritik_saran VALUE(
                                 null,
+								'" . $id_user . "',
                                 '" . $nama . "',
                                 '" . $tanggal . "',
                                 '" . $isi . "',
@@ -112,23 +127,37 @@ include("./app/database/db.php");
 			</div>
 		</div>
 	</div>
-	<!-- end contact form -->
-
-	<!-- find our location -->
 	<div class="find-location blue-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 text-center">
-					<p></i> Find Our Location</p>
+				<div class="col-lg-12">
+					<h4 style="color: white;" class="m-5">Kritik Terkirim</h4>
+					<table id="datatablesSimple">
+                <thead>
+                  <tr style="font-size: 16px;">
+                    <th>Tanggal</th>
+                    <th>Isi Kritik Saran</th>
+					<th>Balasan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $no = 1;
+					$id_user = $_SESSION['user']['id_user'];
+                    $get_paket = mysqli_query($conn, "SELECT * FROM kritik_saran WHERE id_user = '$id_user'");
+                    while ($p = mysqli_fetch_array($get_paket)) {
+                  ?>
+                    <tr style="font-size: 16px;" id="klik-tabel">
+                      <td><?php echo $p['tanggal']; ?></td>
+                      <td><?php echo $p['isi_kritik_saran']; ?></td>
+					  <td><?php echo $p['balasan']; ?></td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end find our location -->
-
-	<!-- google map section -->
-	<div class="embed-responsive embed-responsive-21by9">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26432.42324808999!2d-118.34398767954286!3d34.09378509738966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bf07045279bf%3A0xf67a9a6797bdfae4!2sHollywood%2C%20Los%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1576846473265!5m2!1sen!2sbd" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" class="embed-responsive-item"></iframe>
 	</div>
 	<!-- end google map section -->
 

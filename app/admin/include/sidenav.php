@@ -39,16 +39,16 @@
                      </div>
                      kritik Saran
                   </a>
-                  <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
+                  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
                      <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                      Data Laporan
                      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                  </a> -->
+                  </a>
                   <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                      <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="penjualan.php">Penjualan</a>
-                        <a class="nav-link" href="promosi-produk.php">Promosi Produk</a>
-                        <a class="nav-link" href="kritik-saran-laporan.php">Kritik Saran</a>
+                        <a class="nav-link" href="laporan-penjualan.php">Penjualan</a>
+                        <a class="nav-link" href="laporan-promosi.php">Promosi Produk</a>
+                        <a class="nav-link" href="laporan-kritik.php">Kritik Saran</a>
                      </nav>
                   </div>
                   <a class="nav-link" href="logout.php">
