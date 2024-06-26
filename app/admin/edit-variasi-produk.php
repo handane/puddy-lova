@@ -33,7 +33,7 @@ if (!isset($_SESSION["admin"])) {
     <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Produk</li>
+            <li class="breadcrumb-item active">Edit Produk</li>
           </ol>
           <div class="card">
             <div class="card-body">
@@ -53,9 +53,13 @@ if (!isset($_SESSION["admin"])) {
                         <label for="" class="form-label-md"><b>harga</b></label>
                         <input type="text" class="form-control" name="harga" value="<?php echo $row['harga'] ?>" />
                       </div>
-                      <div class="col-md-6">
+                      <!-- <div class="col-md-6">
                         <label for="" class="form-label-md"><b>stok</b></label>
                         <input type="text" class="form-control" name="stok_produk" value="<?php echo $row['stok_produk'] ?>" />
+                      </div> -->
+                      <div class="col-md-6">
+                        <label for="" class="form-label-md"><b>Gambar</b></label>
+                        <input type="file" class="form-control" name="foto" required />
                       </div>
                       <div class="col-md-12">
                         <input type="submit" class="btn btn-success" name="submit" value="Save" />
@@ -69,10 +73,21 @@ if (!isset($_SESSION["admin"])) {
                 $harga = $_POST['harga'];
                 $stok_produk = $_POST['stok_produk'];
 
+                $filename1 = $_FILES['foto']['name'];
+                $tmp_name1 = $_FILES['foto']['tmp_name'];
+                $ukuran1 = $_FILES['foto']['size'];
+                $type1 = explode('.', $filename1);
+                $type2 = $type1[1];
+                $newname1 = 'f' . time() . '.' . $type2;
+                $tipe_diizinkan = array('jpg', 'jpeg', 'png', '');
+
+                $dest = "./foto/" . $_FILES['foto']['name'];
+                move_uploaded_file($tmp_name1, './foto/' . $newname1);
+
                 $update = mysqli_query($conn, "UPDATE produk SET
                            nama_produk = '$nama_produk',
-                           harga = '$harga',
-                           stok_produk = '$stok_produk'
+                           gambar = '$newname1',
+                           harga = '$harga'
                            WHERE id_produk = '$id_produk'");
                 if ($update) {
               ?>

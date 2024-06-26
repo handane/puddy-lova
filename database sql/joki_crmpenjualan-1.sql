@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2024 at 04:20 PM
+-- Generation Time: Jun 26, 2024 at 09:14 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -66,8 +66,7 @@ CREATE TABLE `keranjang` (
 INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_user`, `jumlah`, `total`, `riwayat`, `tanggal`, `waktu`, `bukti_transfer`) VALUES
 (34, 5, 3, 3, 666, 'menunggu pembayaran', '26-06-2024', '09:06', 'f1719385945.51'),
 (35, 3, 3, 4, 355556, 'sudah bayar', '26-06-2024', '09:06', 'f1719385999.jpg'),
-(36, 5, 3, 1, 222, 'menunggu pembayaran', '26-06-2024', '09:06', ''),
-(39, 3, 3, 4, 156445, 'belum checkout', '', '', '');
+(36, 5, 3, 1, 222, 'menunggu pembayaran', '26-06-2024', '09:06', '');
 
 -- --------------------------------------------------------
 
@@ -77,21 +76,11 @@ INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_user`, `jumlah`, `tota
 
 CREATE TABLE `kritik_saran` (
   `id_kritik_saran` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `nama` varchar(111) NOT NULL,
   `tanggal` varchar(55) NOT NULL,
   `isi_kritik_saran` varchar(1000) NOT NULL,
   `balasan` varchar(1111) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kritik_saran`
---
-
-INSERT INTO `kritik_saran` (`id_kritik_saran`, `id_user`, `nama`, `tanggal`, `isi_kritik_saran`, `balasan`) VALUES
-(5, 3, 'elhamsah', '26-06-2024', 'kok gitu', 'yooaaiii'),
-(6, 3, 'emre can', '26-06-2024', 'ldsjfoiniso jfsodifnoiasdfio dsj oisadn fiosd ioasn iodnsaivoosdifn isodafniovdf hsdafosad', 'ldsjfoiniso jfsodifnoiasdfio dsj oisadn fiosd ioasn iodnsaivoosdifn isodafniovdf hsdafosad dfsdaf sadfadsf as'),
-(7, 3, 'lovren', '26-06-2024', 'cek aja', '');
 
 -- --------------------------------------------------------
 
@@ -136,8 +125,7 @@ CREATE TABLE `promosi` (
 
 INSERT INTO `promosi` (`id_promosi_produk`, `id_produk`, `promo`, `mulai`, `berakhir`) VALUES
 (3, 3, '44', '2024-06-05', '2024-06-21'),
-(4, 6, '15', '2024-06-21', '2024-06-21'),
-(5, 5, '40000', '2024-06-25', '2024-06-28');
+(4, 6, '15', '2024-06-21', '2024-06-21');
 
 -- --------------------------------------------------------
 
@@ -253,13 +241,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `kritik_saran`
 --
 ALTER TABLE `kritik_saran`
-  MODIFY `id_kritik_saran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kritik_saran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -271,7 +259,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `promosi`
 --
 ALTER TABLE `promosi`
-  MODIFY `id_promosi_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_promosi_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transaksi`

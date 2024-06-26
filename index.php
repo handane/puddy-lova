@@ -88,7 +88,7 @@ require('./app/database/db.php');
 
 			<div class="row">
 			<?php 
-				$produk = mysqli_query($conn, "SELECT * FROM produk LIMIT 3");
+				$produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.stok_produk > 0 LIMIT 3");
 				while ($p = mysqli_fetch_array($produk)) {
 			?>
 			<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>">
@@ -99,6 +99,7 @@ require('./app/database/db.php');
 						</div>
 						<h3><?php echo $p['nama_produk'] ?></h3>
 						<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
+						<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
 						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Detail</a>
 					</div>
 				</div>
