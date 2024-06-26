@@ -6,7 +6,7 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
-								<img src="./assets/images/logo.jpeg" alt="">
+								<img src="./assets/images/logo2.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
