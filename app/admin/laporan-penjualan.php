@@ -62,6 +62,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Tanggal</th>
                     <th>Waktu</th>
                     <th>Promo</th>
+                    <th>Total</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -78,6 +79,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['tanggal']; ?></td>
                       <td><?php echo $p['waktu']; ?></td>
                       <td><?php echo $p['promo']; ?>%</td>
+                      <td>Rp <?php echo number_format($p['total']) ?></td>
                       <td><?php echo $p['riwayat']; ?></td>
                     </tr>
                   <?php } ?>

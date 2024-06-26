@@ -63,6 +63,7 @@ if (!isset($_SESSION["admin"])) {
                       <td>
                         <a class="btn btn-sm btn-warning" href="detail-kritik-saran.php?id_kritik_saran=<?php echo $p['id_kritik_saran'] ?>">Detail</a>
                         <a class="btn btn-sm btn-primary" href="balas-kritik-saran.php?id_kritik_saran=<?php echo $p['id_kritik_saran'] ?>">Balas</a>
+                        <a class="btn btn-sm btn-danger" href="delete.php?id_kritik_saran=<?php echo $p['id_kritik_saran'] ?>">Hapus</a>
                       </td>
                     </tr>
                   <?php } ?>

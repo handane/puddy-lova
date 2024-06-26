@@ -19,7 +19,8 @@ if (!isset($_SESSION["user"])) {
         $p = mysqli_fetch_array($produk);
         $promo = $p['promo'] / 100;
         $harga_promo = $p['harga'] * $promo;
-        $total = $harga_promo * $jumlah;
+        $harga_baru = $p['harga'] - $harga_promo;
+        $total = $harga_baru * $jumlah;
 
 
         $get_regist = mysqli_query($conn, "INSERT INTO keranjang VALUE(

@@ -33,4 +33,11 @@ if (isset($_GET['id_user'])) {
       echo "<script>window.location='pelanggan.php'</script>";
    }
 }
+if (isset($_GET['id_kritik_saran'])) {
+   $id_kritik_saran = $_GET['id_kritik_saran'];
+   $delete_kritik = mysqli_query($conn, "DELETE FROM kritik_saran WHERE id_kritik_saran = '$id_kritik_saran'");
+   if($delete_kritik){
+      echo "<script>window.location='kritik-saran.php'</script>";
+   }
+}
 ?>

@@ -58,6 +58,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
                 <th>Tanggal</th>
                 <th>Waktu</th>
                 <th>Promo</th>
+                <th>Total</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -74,6 +75,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
                   <td><?php echo $p['tanggal']; ?></td>
                   <td><?php echo $p['waktu']; ?></td>
                   <td><?php echo $p['promo']; ?>%</td>
+                  <td>Rp <?php echo number_format($p['total']) ?></td>
                   <td><?php echo $p['riwayat']; ?></td>
                 </tr>
               <?php } ?>
