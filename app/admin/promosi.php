@@ -57,7 +57,7 @@ if (!isset($_SESSION["admin"])) {
                         <option value="<?= $p['id_produk'] ?>"><?= $p['nama_produk'] ?></option>
                         <?php } ?>
                       </select>
-                      <input type="number" class="form-control mt-3" id="recipient-name" autocomplete="off" name="promo" placeholder="promo %">
+                      <input type="number" class="form-control mt-3" id="recipient-name" autocomplete="off" name="promo" placeholder="Promo %">
                       <label for="" class="mt-3">Mulai</label>
                       <input type="date" class="form-control" id="recipient-name" autocomplete="off" name="mulai" placeholder="Mulai">
                       <label for="" class="mt-3">Berakhir</label>
@@ -100,7 +100,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>No</th>
                     <th>Produk</th>
                     <th>Gambar</th>
-                    <th>Promo</th>
+                    <th>Harga Promo</th>
                     <th>Mulai</th>
                     <th>Berakhir</th>
                     <th>Action</th>

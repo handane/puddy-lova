@@ -50,7 +50,7 @@ if (!isset($_SESSION["admin"])) {
                         <input type="text" class="form-control" name="nama_produk" value="<?php echo $row['nama_produk'] ?>" readonly/>
                       </div>
                       <div class="col-md-6">
-                        <label for="" class="form-label-md"><b>Promo (%)</b></label>
+                        <label for="" class="form-label-md"><b>harga Promo</b></label>
                         <input type="text" class="form-control" name="promo" value="<?php echo $row['promo'] ?>" />
                       </div>
                       <div class="col-md-6">

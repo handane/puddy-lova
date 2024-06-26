@@ -17,7 +17,9 @@ if (!isset($_SESSION["user"])) {
 
         $produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.id_produk = $id_produk");
         $p = mysqli_fetch_array($produk);
-        $total = $p['harga'] * $jumlah;
+        $promo = $p['promo'] / 100;
+        $harga_promo = $p['harga'] * $promo;
+        $total = $harga_promo * $jumlah;
 
 
         $get_regist = mysqli_query($conn, "INSERT INTO keranjang VALUE(

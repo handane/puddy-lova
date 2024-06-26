@@ -82,10 +82,11 @@ if ($row < 1) {
 							<thead class="cart-table-head">
 								<tr class="table-head-row">
 									<th class="product-image"></th>
-									<th class="product-image">Product Image</th>
-									<th class="product-name">Name</th>
-									<th class="product-price">Price</th>
-									<th class="product-quantity">Quantity</th>
+									<th class="product-image">Image</th>
+									<th class="product-name">Nama</th>
+									<th class="product-price">Harga</th>
+									<th class="product-quantity">Promo(%)</th>
+									<th class="product-quantity">Jumlah</th>
 									<th class="product-total">Total</th>
 								</tr>
 							</thead>
@@ -101,6 +102,7 @@ if ($row < 1) {
 									<td class="product-image"><img src="./app/admin/foto/<?= $p['gambar'] ?>" alt=""></td>
 									<td class="product-name"><?= $p['nama_produk'] ?><input type="hidden" name="produk" value="<?= $p['nama_produk'] ?>"></td>
 									<td class="product-price">Rp. <?php echo number_format($p['harga']) ?></td>
+									<td class="product-price"><?php echo $p['promo'] ?>%</td>
 									<td class="product-quantity"><?php echo $p['jumlah'] ?><input type="hidden" name="jumlah" value="<?php echo $p['jumlah'] ?>"></td>
 									<td class="product-total">Rp <?php echo number_format($p['total']) ?></td>
 									<?php 
@@ -131,9 +133,10 @@ if ($row < 1) {
 								<tr class="total-data">
 									<?php 
 										$total_akhir = array_sum($array);
+										$total_paling_akhir = $total_akhir + 15000;
 									?>
 									<td><strong>Total: </strong></td>
-									<td>Rp <?php echo number_format($total_akhir) ?><input type="hidden" name="total" value="<?php echo number_format($total_akhir) ?>"></td>
+									<td>Rp <?php echo number_format($total_paling_akhir) ?><input type="hidden" name="total" value="<?php echo number_format($total_paling_akhir) ?>"></td>
 								</tr>
 							</tbody>
 						</table>
