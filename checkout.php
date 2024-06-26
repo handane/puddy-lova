@@ -62,8 +62,8 @@ if ($row < 1) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Keranjang</p>
-						<h1>Checkout</h1>
+						<p>Checkout</p>
+						<h1>Keranjang</h1>
 					</div>
 				</div>
 			</div>

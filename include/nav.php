@@ -19,6 +19,7 @@
 								<li><a href="produk.php">Produk</a>
 								</li>
                                 <li><a href="kritik.php">Kritik</a>
+								<li><a href="checkout.php">Keranjang</a>
 								<li><a href="riwayat-transaksi.php">Riwayat</a>
                                 <li><a href="profil.php">Profil</a>
 								</li>
@@ -26,7 +27,6 @@
                                         <li><a href="login.php">Login</a></li>
                                     <?php }else{ ?>
                                         <li><a href="logout.php">Logout</a></li>
-                                        <li><a href="#"><?php echo $_SESSION['user']['nama'] ?></a></li>
                                     <?php } ?>
 							</ul>
 						</nav>
