@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2024 at 05:20 AM
+-- Generation Time: Jun 26, 2024 at 04:20 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -49,7 +49,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`, `name`) VALUES
 
 CREATE TABLE `keranjang` (
   `id_keranjang` int(11) NOT NULL,
-  `id_produk` varchar(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `total` int(55) NOT NULL,
@@ -58,6 +58,16 @@ CREATE TABLE `keranjang` (
   `waktu` varchar(55) NOT NULL,
   `bukti_transfer` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_user`, `jumlah`, `total`, `riwayat`, `tanggal`, `waktu`, `bukti_transfer`) VALUES
+(34, 5, 3, 3, 666, 'menunggu pembayaran', '26-06-2024', '09:06', 'f1719385945.51'),
+(35, 3, 3, 4, 355556, 'sudah bayar', '26-06-2024', '09:06', 'f1719385999.jpg'),
+(36, 5, 3, 1, 222, 'menunggu pembayaran', '26-06-2024', '09:06', ''),
+(39, 3, 3, 4, 156445, 'belum checkout', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -79,7 +89,9 @@ CREATE TABLE `kritik_saran` (
 --
 
 INSERT INTO `kritik_saran` (`id_kritik_saran`, `id_user`, `nama`, `tanggal`, `isi_kritik_saran`, `balasan`) VALUES
-(5, 3, 'elhamsah', '26-06-2024', 'kok gitu', 'yooaaiii');
+(5, 3, 'elhamsah', '26-06-2024', 'kok gitu', 'yooaaiii'),
+(6, 3, 'emre can', '26-06-2024', 'ldsjfoiniso jfsodifnoiasdfio dsj oisadn fiosd ioasn iodnsaivoosdifn isodafniovdf hsdafosad', 'ldsjfoiniso jfsodifnoiasdfio dsj oisadn fiosd ioasn iodnsaivoosdifn isodafniovdf hsdafosad dfsdaf sadfadsf as'),
+(7, 3, 'lovren', '26-06-2024', 'cek aja', '');
 
 -- --------------------------------------------------------
 
@@ -88,8 +100,7 @@ INSERT INTO `kritik_saran` (`id_kritik_saran`, `id_user`, `nama`, `tanggal`, `is
 --
 
 CREATE TABLE `produk` (
-  `id` int(11) NOT NULL,
-  `id_produk` varchar(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(55) NOT NULL,
   `gambar` varchar(55) NOT NULL,
   `harga` varchar(55) NOT NULL,
@@ -100,8 +111,10 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id`, `id_produk`, `nama_produk`, `gambar`, `harga`, `stok_produk`) VALUES
-(3, 'me389', 'kotak amal', 'f1719458225.jpg', '200000', '6');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `gambar`, `harga`, `stok_produk`) VALUES
+(3, 'kotak', 'f1718647070.png', '88889', '5'),
+(5, 'asbak', 'f1718691085.png', '222', '9'),
+(6, 'kacang', 'f1718900263.png', '90000', '0');
 
 -- --------------------------------------------------------
 
@@ -111,7 +124,7 @@ INSERT INTO `produk` (`id`, `id_produk`, `nama_produk`, `gambar`, `harga`, `stok
 
 CREATE TABLE `promosi` (
   `id_promosi_produk` int(11) NOT NULL,
-  `id_produk` varchar(55) NOT NULL,
+  `id_produk` int(55) NOT NULL,
   `promo` varchar(55) NOT NULL,
   `mulai` varchar(55) NOT NULL,
   `berakhir` varchar(55) NOT NULL
@@ -122,7 +135,9 @@ CREATE TABLE `promosi` (
 --
 
 INSERT INTO `promosi` (`id_promosi_produk`, `id_produk`, `promo`, `mulai`, `berakhir`) VALUES
-(11, 'me389', '0', '2024-06-27', '2024-06-27');
+(3, 3, '44', '2024-06-05', '2024-06-21'),
+(4, 6, '15', '2024-06-21', '2024-06-21'),
+(5, 5, '40000', '2024-06-25', '2024-06-28');
 
 -- --------------------------------------------------------
 
@@ -139,6 +154,23 @@ CREATE TABLE `transaksi` (
   `promo` varchar(11) NOT NULL,
   `status` varchar(111) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `nama`, `produk`, `tanggal`, `waktu`, `promo`, `status`) VALUES
+(8, 'josua', 'asbak', '26-06-2024', '06:06', '', 'selesai'),
+(9, 'josua', 'asbak', '26-06-2024', '07:06', '', 'selesai'),
+(10, 'josua', 'asbak', '26-06-2024', '07:06', '', 'selesai'),
+(11, 'josua', 'asbak', '26-06-2024', '07:06', '', 'selesai'),
+(12, 'josua', 'kotak', '26-06-2024', '07:06', '44', 'selesai'),
+(13, 'josua', 'kotak', '26-06-2024', '07:06', '44', 'selesai'),
+(14, 'josua', 'asbak', '26-06-2024', '08:06', '', 'selesai'),
+(15, 'josua', 'asbak', '26-06-2024', '08:06', '', 'menunggu pembayaran'),
+(16, 'josua', 'kotak', '26-06-2024', '08:06', '44', 'menunggu pembayaran'),
+(17, 'josua', 'asbak', '26-06-2024', '09:06', '', 'menunggu pembayaran'),
+(18, 'josua', 'asbak', '26-06-2024', '09:06', '', 'menunggu pembayaran');
 
 -- --------------------------------------------------------
 
@@ -159,8 +191,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `no_hp`, `email`, `password`) VALUES
-(3, 'josua', '231131', 'josua@gmail.com', 'josua'),
-(4, 'king', '089809231', 'king@gmail.com', 'king');
+(3, 'josua', '231131', 'josua@gmail.com', 'josua');
 
 --
 -- Indexes for dumped tables
@@ -188,7 +219,7 @@ ALTER TABLE `kritik_saran`
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_produk`);
 
 --
 -- Indexes for table `promosi`
@@ -222,7 +253,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `kritik_saran`
@@ -234,25 +265,25 @@ ALTER TABLE `kritik_saran`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `promosi`
 --
 ALTER TABLE `promosi`
-  MODIFY `id_promosi_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_promosi_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

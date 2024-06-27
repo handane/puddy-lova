@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
 } 
 $id_user = $_SESSION["user"]['id_user'];
 $id_produk = $_GET['id_produk'];
-$produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.id_produk = $id_produk");
+$produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.id_produk = '$id_produk'");
 $p = mysqli_fetch_array($produk);
 ?>
 <!DOCTYPE html>

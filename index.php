@@ -99,7 +99,10 @@ require('./app/database/db.php');
 						</div>
 						<h3><?php echo $p['nama_produk'] ?></h3>
 						<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
+						<?php if($p['promo'] > 0){ ?>
 						<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
+						<?php }if($p['promo'] == 0){ ?>
+						<?php } ?>
 						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Detail</a>
 					</div>
 				</div>

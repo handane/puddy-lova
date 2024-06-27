@@ -35,7 +35,7 @@ if (!isset($_SESSION["admin"])) {
           <ol class="breadcrumb mb-4 mt-2">
             <li class="breadcrumb-item active">Promosi</li>
           </ol>
-          <button type="button" class="mb-3 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tambah</button>
+          <!-- <button type="button" class="mb-3 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tambah</button> -->
           <!-- tanggapan -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

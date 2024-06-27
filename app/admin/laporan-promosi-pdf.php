@@ -54,9 +54,9 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
               <tr style="font-size: 16px;">
               <th>No</th>
               <th>Produk</th>
-              <th>Gambar</th>
               <th>Promo</th>
-              <th>Tanggal</th>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Berakhir</th>
               </tr>
             </thead>
             <tbody>
@@ -68,9 +68,9 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
                 <tr style="font-size: 16px;" id="klik-tabel">
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $p['nama_produk']; ?></td>
-                    <td><img src="./foto/<?= $p['gambar'] ?>" width="100px" alt=""></td>
                     <td><?php echo $p['promo']; ?>%</td>
                     <td><?php echo $p['mulai']; ?></td>
+                    <td><?php echo $p['berakhir']; ?></td>
                 </tr>
               <?php } ?>
             </tbody>

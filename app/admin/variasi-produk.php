@@ -59,6 +59,18 @@ if (!isset($_SESSION["admin"])) {
                 </form>
                 <?php
                 if (isset($_POST["regist"])) {
+                  function generateRandomText() {
+                    $characters = 'abcdefghijklm0123456789';
+                    $randomString = '';
+                
+                    for ($i = 0; $i < 5; $i++) {
+                        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+                    }
+                
+                    return $randomString;
+                }
+                
+                  $id_produk = generateRandomText();
                   $nama_produk = $_POST['nama_produk'];
                   $harga = $_POST['harga'];
                   $stok_produk = 0;
@@ -76,12 +88,28 @@ if (!isset($_SESSION["admin"])) {
 
                   $get_regist = mysqli_query($conn, "INSERT INTO produk VALUE(
                                 null,
+                                '" . $id_produk . "',
                                 '" . $nama_produk . "',
                                 '" . $newname1 . "',
                                 '" . $harga . "',
                                 '" . $stok_produk . "'
                             )");
-                    if ($get_regist) {
+
+                    $get_produk = mysqli_query($conn, "SELECT * FROM produk");
+                    
+                    $promo = 0;
+                    $mulai = date('Y-m-d');
+                    $berakhir = date('Y-m-d');
+
+                    $get_promosi = mysqli_query($conn, "INSERT INTO promosi VALUE(
+                    null,
+                    '" . $id_produk . "',
+                    '" . $promo . "',
+                    '" . $mulai . "',
+                    '" . $berakhir . "'
+                    )");
+
+                    if ($get_regist & $get_promosi) {
                       echo '<script>alert("data berhasil ditambahkan")</script>';
                     } else {
                       echo '<script>alert("data gagal ditambahkan")</script>';
