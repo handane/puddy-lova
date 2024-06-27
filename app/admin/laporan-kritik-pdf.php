@@ -56,6 +56,7 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
                 <th>Nama</th>
                 <th>Tanggal</th>
                 <th>Isi Kritik Saran</th>
+                <th>Balasan/th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +69,8 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $p['nama']; ?></td>
                   <td><?php echo $p['tanggal']; ?></td>
-                  <td><?php echo substr($p['isi_kritik_saran'], 0, 200); ?></td>
+                  <td><?php echo substr($p['isi_kritik_saran'], 0, 300); ?></td>
+                  <td><?php echo substr($p['balasan'], 0, 300); ?></td>
                 </tr>
               <?php } ?>
             </tbody>
