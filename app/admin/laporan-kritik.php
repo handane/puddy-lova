@@ -60,6 +60,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Nama</th>
                     <th>Tanggal</th>
                     <th>Isi Kritik Saran</th>
+                    <th>Balasan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -73,6 +74,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['nama']; ?></td>
                       <td><?php echo $p['tanggal']; ?></td>
                       <td><?php echo substr($p['isi_kritik_saran'], 0, 200); ?></td>
+                      <td><?php echo substr($p['balasan'], 0, 200); ?></td>
                     </tr>
                   <?php } ?>
                 </tbody>

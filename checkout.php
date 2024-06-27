@@ -157,10 +157,11 @@ $row = mysqli_num_rows($produk);
 		</form>
 		<?php
                 if (isset($_POST["beli"])) {
+					date_default_timezone_set('Asia/Jakarta');
                   $nama = $_POST['nama'];
                   $produk = $_POST['produk'];
                   $tanggal = date('d-m-Y');
-                  $waktu = date('h:m');
+                  $waktu = date('H:i');
                   $promo = $_POST['promo'];
                   $status = 'menunggu pembayaran';
 
