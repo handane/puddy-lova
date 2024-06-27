@@ -5,8 +5,9 @@ include("./app/database/db.php");
 if (!isset($_SESSION["user"])) {
   echo "<script>location='./login.php'</script>";
 } 
+
 $id_user = $_SESSION["user"]['id_user'];
-$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'menunggu pembayaran' OR keranjang.id_user = $id_user AND keranjang.riwayat = 'sudah bayar'");
+$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'menunggu pembayaran' OR keranjang.id_user = $id_user AND keranjang.riwayat = 'sudah bayar' OR keranjang.id_user = $id_user AND keranjang.riwayat = 'Pembayaran Diterima' OR keranjang.id_user = $id_user AND keranjang.riwayat = 'Bukti Transfer Ditolak'");
 $row = mysqli_num_rows($produk);
 if ($row < 1) {
 	echo '<script>alert("Belum ada riwayat transaksi")</script>';
@@ -106,9 +107,14 @@ if ($row < 1) {
 										if($p['riwayat'] == 'menunggu pembayaran'){
 									?>
 										<td><a  class="cart-btn btn btn-sm" href="upload-bukti.php?id_keranjang=<?= $p['id_keranjang'] ?>"><i class="fas fa-money-bill-wave"></i> Upload</a></td>
-									<?php }else{ ?>
+									<?php }if($p['riwayat'] == 'sudah bayar'){?>
+										<td>Menunggu</td>
+										<?php }if($p['riwayat'] == 'Pembayaran Diterima'){ ?>
 										<td>Lunas</td>
-									<?php } ?>
+									<?php }if($p['riwayat'] == 'Bukti Transfer Ditolak'){ ?>
+										<td>Ditolak</td>
+										<?php } ?>
+										
 									<td class="product-name"><i><?= $p['riwayat'] ?></i></td>
 									<td class="product-image"><img src="./app/admin/foto/<?= $p['gambar'] ?>" alt=""></td>
 									<td class="product-name"><?= $p['nama_produk'] ?><input type="hidden" name="produk" value="<?= $p['nama_produk'] ?>"></td>

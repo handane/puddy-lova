@@ -48,6 +48,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Promo</th>
                     <th>Status</th>
                     <th>Bukti Transfer</th>
+                    <th>Konfirmasi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,6 +66,11 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['promo']; ?>%</td>
                       <td><?php echo $p['riwayat']; ?></td>
                       <td><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt=""></td>
+                      <td>
+                        <a class="btn btn-sm btn-success" onclick="return confirm('apakah anda yakin ingin pelanggan sudah membayar?')" href="terima.php?id_keranjang_transaksi=<?php echo $p['id_keranjang'] ?>">Terima</a>
+                        <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menolak bukti transfer?')" href="delete.php?id_keranjang_transaksi=<?php echo $p['id_keranjang'] ?>">Tolak</a>
+                      </td>
+                      
                     </tr>
                   <?php } ?>
                 </tbody>

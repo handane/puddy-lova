@@ -40,4 +40,15 @@ if (isset($_GET['id_kritik_saran'])) {
       echo "<script>window.location='kritik-saran.php'</script>";
    }
 }
+if (isset($_GET['id_keranjang_transaksi'])) {
+   $id_keranjang_transaksi = $_GET['id_keranjang_transaksi'];
+   $status = 'Bukti Transfer Ditolak';
+
+   $delete_transaksi_keranjang = mysqli_query($conn, "UPDATE keranjang SET
+   riwayat = '$status'
+   WHERE id_keranjang = '$id_keranjang_transaksi'");
+   if($delete_transaksi_keranjang){
+      echo "<script>window.location='transaksi.php'</script>";
+   }
+}
 ?>
