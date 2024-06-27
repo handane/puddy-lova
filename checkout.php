@@ -8,9 +8,10 @@ if (!isset($_SESSION["user"])) {
 $id_user = $_SESSION["user"]['id_user'];
 $produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'belum checkout'");
 $row = mysqli_num_rows($produk);
-if ($row < 1) {
-	echo "<script>location='./produk.php'</script>";
-  } 
+
+// if ($row < 1) {
+// 	echo "<script>location='./produk.php'</script>";
+//   } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,9 +141,16 @@ if ($row < 1) {
 								</tr>
 							</tbody>
 						</table>
+						<?php 
+						if ($row < 1) {
+							// echo "<script>location='./produk.php'</script>";
+						} else{
+						?>
 						<div class="cart-buttons">
 							<input type="submit" name="beli" class="cart-btn" value="Checkout">
 						</div>
+						<?php } ?>
+						
 					</div>
 				</div>
 			</div>
@@ -170,7 +178,7 @@ if ($row < 1) {
 					riwayat = '$status',
 					tanggal = '$tanggal',
 					waktu = '$waktu'
-					WHERE id_user = '$id_user'");
+					WHERE id_user = '$id_user' AND riwayat = 'belum checkout'");
                     if ($get_regist) {
                       echo '<script>alert("pembelian berhasil")</script>';
 					  echo '<script>window.location="riwayat-transaksi.php"</script>';

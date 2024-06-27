@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
   echo "<script>location='./login.php'</script>";
 } 
 $id_user = $_SESSION["user"]['id_user'];
-$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'menunggu pembayaran' OR keranjang.riwayat = 'sudah bayar'");
+$produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'menunggu pembayaran' OR keranjang.id_user = $id_user AND keranjang.riwayat = 'sudah bayar'");
 $row = mysqli_num_rows($produk);
 if ($row < 1) {
 	echo '<script>alert("Belum ada riwayat transaksi")</script>';
