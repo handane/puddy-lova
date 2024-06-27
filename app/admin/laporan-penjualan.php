@@ -20,6 +20,41 @@ if (!isset($_SESSION["admin"])) {
     body {
       background-color: #f1f1f1;
     }
+    .overlay {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: auto;
+  }
+
+  .overlay-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+  }
+
+  .overlay img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+
+  .closebtn {
+    color: white;
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 40px;
+    cursor: pointer;
+  }
   </style>
 </head>
 
@@ -64,6 +99,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Promo</th>
                     <th>Total</th>
                     <th>Status</th>
+                    <th>Bukti Transfer</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -81,10 +117,17 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['promo']; ?>%</td>
                       <td>Rp <?php echo number_format($p['total']) ?></td>
                       <td><?php echo $p['riwayat']; ?></td>
+                      <td><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt="" onClick="openOverlay(this)"></td>
                     </tr>
                   <?php } ?>
                 </tbody>
               </table>
+              <div id="overlay" class="overlay" onClick="closeOverlay()">
+                <span class="closebtn">&times;</span>
+                <div class="overlay-content">
+                  <img id="img-overlay" src="" alt="">
+                </div>
+              </div>
             </div>
           </div>
       </main>
@@ -98,7 +141,24 @@ if (!isset($_SESSION["admin"])) {
   <script src="../bootstrap/js/bootstrap.min.js"></script>
   <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <script>
+  // Fungsi untuk membuka overlay dengan gambar yang diperbesar
+  function openOverlay(img) {
+    var overlay = document.getElementById("overlay");
+    var imgOverlay = document.getElementById("img-overlay");
 
+    // Set gambar pada overlay
+    imgOverlay.src = img.src;
+
+    // Tampilkan overlay
+    overlay.style.display = "block";
+  }
+
+  // Fungsi untuk menutup overlay
+  function closeOverlay() {
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
 </body>
 
 </html>
