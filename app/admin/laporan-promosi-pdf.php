@@ -62,7 +62,7 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
             <tbody>
                 <?php
                   $no = 1;
-                  $produk = mysqli_query($conn, "SELECT * FROM promosi LEFT JOIN produk ON promosi.id_produk = produk.id_produk WHERE promosi.mulai BETWEEN '$tgl_start' AND '$tgl_finish' ORDER BY mulai ASC");
+                  $produk = mysqli_query($conn, "SELECT * FROM promosi LEFT JOIN produk ON promosi.id_produk = produk.id_produk WHERE promosi.mulai BETWEEN '$tgl_start' AND '$tgl_finish' AND promosi.promo > 0 ORDER BY mulai ASC");
                   while ($p = mysqli_fetch_array($produk)) {
                   ?>
                 <tr style="font-size: 16px;" id="klik-tabel">

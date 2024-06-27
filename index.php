@@ -12,10 +12,10 @@ require('./app/database/db.php');
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Home</title>
+	<title>Puddy Lova</title>
 
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/png" href="./assets/images/favicon.png">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -35,7 +35,12 @@ require('./app/database/db.php');
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-
+	
+	<style>
+		.card {
+			border: none;
+		}
+	</style>
 </head>
 
 <body>
@@ -92,18 +97,19 @@ require('./app/database/db.php');
 				while ($p = mysqli_fetch_array($produk)) {
 			?>
 			<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
+				<div class="col-lg-4 col-md-6 text-center card">
+					<div class="single-product-item" style="height: 100%;">
 						<div class="product-image">
 							<img src="app/admin/foto/<?= $p['gambar'] ?>" alt="">
 						</div>
 						<h3><?php echo $p['nama_produk'] ?></h3>
-						<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
-						<?php if($p['promo'] > 0){ ?>
-						<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
-						<?php }if($p['promo'] == 0){ ?>
-						<?php } ?>
-						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Detail</a>
+							<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
+							<?php if($p['promo'] > 0){ ?>
+							<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
+							<?php }if($p['promo'] == 0){ ?>
+							<p style="color: #fff;">x</p>
+							<?php } ?>
+						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn" style="position: relative; top:10px"><i class="fas fa-shopping-cart"></i> Detail</a>
 					</div>
 				</div>
 				</a>

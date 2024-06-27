@@ -58,23 +58,23 @@ if (!isset($_SESSION["admin"])) {
                   <tr style="font-size: 16px;">
                     <th>No</th>
                     <th>Produk</th>
-                    <th>Gambar</th>
                     <th>Promo</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Berakhir</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $no = 1;
-                  $produk = mysqli_query($conn, "SELECT * FROM promosi LEFT JOIN produk ON promosi.id_produk = produk.id_produk");
+                  $produk = mysqli_query($conn, "SELECT * FROM promosi LEFT JOIN produk ON promosi.id_produk = produk.id_produk WHERE promosi.promo > 0");
                   while ($p = mysqli_fetch_array($produk)) {
                   ?>
                     <tr style="font-size: 16px;" id="klik-tabel">
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $p['nama_produk']; ?></td>
-                      <td><img src="./foto/<?= $p['gambar'] ?>" width="100px" alt=""></td>
                       <td><?php echo $p['promo']; ?>%</td>
                       <td><?php echo $p['mulai']; ?></td>
+                      <td><?php echo $p['berakhir']; ?></td>
                     </tr>
                   <?php } ?>
                 </tbody>

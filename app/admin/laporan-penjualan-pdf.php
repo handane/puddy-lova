@@ -23,7 +23,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
       border: 1px solid black;
     } 
     table td, th{
-      text-indent: 10px;
+      padding: 5px;
     }
     /* table th {
       text-align: center;
@@ -60,6 +60,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
                 <th>Promo</th>
                 <th>Total</th>
                 <th>Status</th>
+                <th>Bukti Transfer</th>
               </tr>
             </thead>
             <tbody>
@@ -77,6 +78,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
                   <td><?php echo $p['promo']; ?>%</td>
                   <td>Rp <?php echo number_format($p['total']) ?></td>
                   <td><?php echo $p['riwayat']; ?></td>
+                  <td class="pb-2 pt-2 text-center"><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt="img"></td>
                 </tr>
               <?php } ?>
             </tbody>
