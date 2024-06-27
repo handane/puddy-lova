@@ -85,7 +85,7 @@ require('./app/database/db.php');
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">
-						<h3><span class="orange-text">Produk</span> Teratas</h3>
+						<h3><span class="orange-text">Produk</span> Terlaris</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
 					</div>
 				</div>
@@ -105,9 +105,9 @@ require('./app/database/db.php');
 						<h3><?php echo $p['nama_produk'] ?></h3>
 							<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
 							<?php if($p['promo'] > 0){ ?>
-							<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
+								<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
 							<?php }if($p['promo'] == 0){ ?>
-							<p style="color: #fff;">x</p>
+							<p class="product-price"><span <span style="color: #fff;">x</span></p>
 							<?php } ?>
 						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn" style="position: relative; top:10px"><i class="fas fa-shopping-cart"></i> Detail</a>
 					</div>

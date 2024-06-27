@@ -92,7 +92,7 @@ require('./app/database/db.php');
 							<?php if($p['promo'] > 0){ ?>
 							<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
 							<?php }if($p['promo'] == 0){ ?>
-							<p style="color: #fff;">x</p>
+							<p class="product-price"><span <span style="color: #fff;">x</span></p>
 							<?php } ?>
 						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Detail</a>
 					</div>
