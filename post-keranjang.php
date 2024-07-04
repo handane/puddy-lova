@@ -21,7 +21,7 @@ if (!isset($_SESSION["user"])) {
         $harga_promo = $p['harga'] * $promo;
         $harga_baru = $p['harga'] - $harga_promo;
         $total = $harga_baru * $jumlah;
-
+        $frekuensi = 0;
 
         $get_regist = mysqli_query($conn, "INSERT INTO keranjang VALUE(
                     null,

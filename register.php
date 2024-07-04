@@ -93,6 +93,8 @@ include("./app/database/db.php");
                $nomor_telepon = $_POST['nomor_telepon'];
                $email = $_POST['email'];
                $password = $_POST['password'];
+               $frekuensi = 0;
+               $status = 'Pelanggan Baru';
 
                if (strlen($password) >= 2 && strlen($password) <= 20) {
                   $query = mysqli_query($conn, "SELECT * FROM user WHERE email='{$email}'");
@@ -102,7 +104,9 @@ include("./app/database/db.php");
                           '" . $nama . "',
                           '" . $nomor_telepon . "',
                           '" . $email . "',
-                          '" . $password . "')
+                          '" . $password . "',
+                          '" . $frekuensi . "',
+                          '" . $status . "')
                           ");
                      if ($add) {
                         echo '<script>alert("data berhasil di tambahkan")</script>';

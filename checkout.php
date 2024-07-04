@@ -165,22 +165,22 @@ $row = mysqli_num_rows($produk);
                   $promo = $_POST['promo'];
                   $status = 'menunggu pembayaran';
 
-                  $get_regist = mysqli_query($conn, "INSERT INTO transaksi VALUE(
-                                null,
-                                '" . $nama . "',
-                                '" . $produk . "',
-                                '" . $tanggal . "',
-                                '" . $waktu . "',
-                                '" . $promo . "',
-                                '" . $status . "'
-                            )");
+                //   $get_regist = mysqli_query($conn, "INSERT INTO transaksi VALUE(
+                //                 null,
+                //                 '" . $nama . "',
+                //                 '" . $produk . "',
+                //                 '" . $tanggal . "',
+                //                 '" . $waktu . "',
+                //                 '" . $promo . "',
+                //                 '" . $status . "'
+                //             )");
 
 					$update = mysqli_query($conn, "UPDATE keranjang SET
 					riwayat = '$status',
 					tanggal = '$tanggal',
 					waktu = '$waktu'
 					WHERE id_user = '$id_user' AND riwayat = 'belum checkout'");
-                    if ($get_regist) {
+                    if ($update) {
                       echo '<script>alert("pembelian berhasil")</script>';
 					  echo '<script>window.location="riwayat-transaksi.php"</script>';
                     } else {

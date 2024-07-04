@@ -45,6 +45,8 @@ if (!isset($_SESSION["admin"])) {
                     <th>No HP</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th>Frekuensi Beli</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -60,6 +62,8 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['no_hp']; ?></td>
                       <td><?php echo $p['email']; ?></td>
                       <td><?php echo $p['password']; ?></td>
+                      <td><?php echo $p['frekuensi']; ?></td>
+                      <td><?php echo $p['status']; ?></td>
                       <td><a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus data?')" href="delete.php?id_user=<?php echo $p['id_user'] ?>">Delete</a></td>
                     </tr>
                   <?php } ?>
