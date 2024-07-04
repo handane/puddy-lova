@@ -8,6 +8,7 @@ if (!isset($_SESSION["user"])) {
 $id_user = $_SESSION["user"]['id_user'];
 $produk = mysqli_query($conn, "SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = produk.id_produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE keranjang.id_user = $id_user AND keranjang.riwayat = 'belum checkout'");
 $row = mysqli_num_rows($produk);
+$status_pelanggan = $_SESSION['user']['status'];
 
 // if ($row < 1) {
 // 	echo "<script>location='./produk.php'</script>";
@@ -86,14 +87,18 @@ $row = mysqli_num_rows($produk);
 									<th class="product-image">Image</th>
 									<th class="product-name">Nama</th>
 									<th class="product-price">Harga</th>
-									<th class="product-quantity">Promo(%)</th>
+
+									<?php if($status_pelanggan == "Pelanggan Lama"){ ?>
+										<th class="product-quantity">Promo(%)</th>
+									<?php }else{} ?>
 									<th class="product-quantity">Jumlah</th>
 									<th class="product-total">Total</th>
 								</tr>
 							</thead>
 							<tbody>
-								<?php $array = []; ?>
-								
+								<?php 
+									$array = []; 
+								?>
 								<?php while($p = mysqli_fetch_array($produk)) { ?>
 								
 								<tr class="table-body-row">
@@ -103,7 +108,14 @@ $row = mysqli_num_rows($produk);
 									<td class="product-image"><img src="./app/admin/foto/<?= $p['gambar'] ?>" alt=""></td>
 									<td class="product-name"><?= $p['nama_produk'] ?><input type="hidden" name="produk" value="<?= $p['nama_produk'] ?>"></td>
 									<td class="product-price">Rp. <?php echo number_format($p['harga']) ?></td>
-									<td class="product-price"><?php echo $p['promo'] ?>%</td>
+
+									<?php if($status_pelanggan == 'Pelanggan Lama'){ ?>
+									<td class="product-price">
+											<?php echo $p['promo'] ?>%
+									</td>
+									<?php }else{ ?>
+										
+									<?php } ?>
 									<td class="product-quantity"><?php echo $p['jumlah'] ?><input type="hidden" name="jumlah" value="<?php echo $p['jumlah'] ?>"></td>
 									<td class="product-total">Rp <?php echo number_format($p['total']) ?></td>
 									<?php 

@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require('./app/database/db.php');
+$status_user = $_SESSION['user']['status'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,9 +104,13 @@ require('./app/database/db.php');
 							<img src="app/admin/foto/<?= $p['gambar'] ?>" alt="">
 						</div>
 						<h3><?php echo $p['nama_produk'] ?></h3>
-							<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
+						<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
 							<?php if($p['promo'] > 0){ ?>
-								<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
+								<?php if($status_user == 'Pelanggan Lama'){ ?>
+									<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo'] ?>%</span></p>
+								<?php }if($status_user == 'Pelanggan Baru'){ ?>
+									<p class="product-price"><span <span style="color: #fff;">x</span></p>		
+								<?php } ?>
 							<?php }if($p['promo'] == 0){ ?>
 							<p class="product-price"><span <span style="color: #fff;">x</span></p>
 							<?php } ?>
