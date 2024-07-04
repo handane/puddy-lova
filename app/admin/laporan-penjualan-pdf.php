@@ -57,7 +57,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
                 <th>Produk</th>
                 <th>Tanggal</th>
                 <th>Waktu</th>
-                <th>Promo</th>
+                <!-- <th>Promo</th> -->
                 <th>Total</th>
                 <th>Status</th>
                 <th>Bukti Transfer</th>
@@ -75,7 +75,7 @@ $tgl_finish = date('d-m-Y', strtotime($tgl_finish_awal));
                   <td><?php echo $p['nama_produk']; ?></td>
                   <td><?php echo $p['tanggal']; ?></td>
                   <td><?php echo $p['waktu']; ?></td>
-                  <td><?php echo $p['promo']; ?>%</td>
+                  <!-- <td><?php echo $p['promo']; ?>%</td> -->
                   <td>Rp <?php echo number_format($p['total']) ?></td>
                   <td><?php echo $p['riwayat']; ?></td>
                   <td class="pb-2 pt-2 text-center"><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt="img"></td>

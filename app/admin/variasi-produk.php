@@ -100,14 +100,16 @@ if (!isset($_SESSION["admin"])) {
 
                     $get_produk = mysqli_query($conn, "SELECT * FROM produk");
                     
-                    $promo = 0;
+                    $promo_lama = 0;
+                    $promo_baru = 0;
                     $mulai = date('Y-m-d');
                     $berakhir = date('Y-m-d');
 
                     $get_promosi = mysqli_query($conn, "INSERT INTO promosi VALUE(
                     null,
                     '" . $id_produk . "',
-                    '" . $promo . "',
+                    '" . $promo_lama . "',
+                    '" . $promo_baru . "',
                     '" . $mulai . "',
                     '" . $berakhir . "'
                     )");

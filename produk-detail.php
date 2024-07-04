@@ -90,9 +90,13 @@ $p = mysqli_fetch_array($produk);
 							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p> -->
 							<div class="single-product-form">
 								<?php 
-								if($status_user == 'Pelanggan Baru'){}
+								if($status_user == 'Pelanggan Baru'){
+									?>
+									<p><strong>Promo: </strong><?php echo $p['promo_baru'] ?>%</p>
+									<?php 
+								}
 								if($status_user == 'Pelanggan Lama'){ ?>
-								<p><strong>Promo: </strong><?php echo $p['promo'] ?>%</p>
+								<p><strong>Promo: </strong><?php echo $p['promo_lama'] ?>%</p>
 								<?php } ?>
 								
 								<p><strong>Stok: </strong><?php echo $p['stok_produk'] ?></p>

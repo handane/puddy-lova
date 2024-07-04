@@ -80,7 +80,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Produk</th>
                     <th>Tanggal</th>
                     <th>Waktu</th>
-                    <th>Promo</th>
+                    <!-- <th>Promo</th> -->
                     <th>Status</th>
                     <th>Bukti Transfer</th>
                     <th>Konfirmasi</th>
@@ -98,7 +98,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['nama_produk']; ?></td>
                       <td><?php echo $p['tanggal']; ?></td>
                       <td><?php echo $p['waktu']; ?></td>
-                      <td><?php echo $p['promo']; ?>%</td>
+                      <!-- <td><?php echo $p['promo']; ?>%</td> -->
                       <td><?php echo $p['riwayat']; ?></td>
                       <td><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt="" onClick="openOverlay(this)"></td>
                       <td>

@@ -57,7 +57,8 @@ if (!isset($_SESSION["admin"])) {
                         <option value="<?= $p['id_produk'] ?>"><?= $p['nama_produk'] ?></option>
                         <?php } ?>
                       </select>
-                      <input type="number" class="form-control mt-3" id="recipient-name" autocomplete="off" name="promo" placeholder="Promo %">
+                      <input type="number" class="form-control mt-3" id="recipient-name" autocomplete="off" name="promo_baru" placeholder="Promo Pelanggan Baru %">
+                      <input type="number" class="form-control mt-3" id="recipient-name" autocomplete="off" name="promo_lama" placeholder="Promo Pelanggan Lama %">
                       <label for="" class="mt-3">Mulai</label>
                       <input type="date" class="form-control" id="recipient-name" autocomplete="off" name="mulai" placeholder="Mulai">
                       <label for="" class="mt-3">Berakhir</label>
@@ -100,7 +101,8 @@ if (!isset($_SESSION["admin"])) {
                     <th>No</th>
                     <th>Produk</th>
                     <th>Gambar</th>
-                    <th>Harga Promo</th>
+                    <th>Promo Pelanggan Lama</th>
+                    <th>Promo Pelanggan Baru</th>
                     <th>Mulai</th>
                     <th>Berakhir</th>
                     <th>Action</th>
@@ -116,7 +118,8 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $p['nama_produk']; ?></td>
                       <td><img src="./foto/<?= $p['gambar'] ?>" width="100px" alt=""></td>
-                      <td><?php echo $p['promo']; ?>%</td>
+                      <td><?php echo $p['promo_lama']; ?>%</td>
+                      <td><?php echo $p['promo_baru']; ?>%</td>
                       <td><?php echo $p['mulai']; ?></td>
                       <td><?php echo $p['berakhir']; ?></td>
                       <td>

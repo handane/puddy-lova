@@ -50,8 +50,12 @@ if (!isset($_SESSION["admin"])) {
                         <input type="text" class="form-control" name="nama_produk" value="<?php echo $row['nama_produk'] ?>" readonly/>
                       </div>
                       <div class="col-md-6">
-                        <label for="" class="form-label-md"><b>harga Promo</b></label>
-                        <input type="text" class="form-control" name="promo" value="<?php echo $row['promo'] ?>" />
+                        <label for="" class="form-label-md"><b>Promo Pelanggan Lama</b></label>
+                        <input type="text" class="form-control" name="promo_lama" value="<?php echo $row['promo_lama'] ?>" />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label-md"><b>Promo Pelanggan Baru</b></label>
+                        <input type="text" class="form-control" name="promo_baru" value="<?php echo $row['promo_baru'] ?>" />
                       </div>
                       <div class="col-md-6">
                         <label for="" class="form-label-md"><b>Mulai</b></label>
@@ -69,12 +73,14 @@ if (!isset($_SESSION["admin"])) {
 
               <?php
               if (isset($_POST['submit'])) {
-                $promo = $_POST['promo'];
+                $promo_lama = $_POST['promo_lama'];
+                $promo_baru = $_POST['promo_baru'];
                 $mulai = $_POST['mulai'];
                 $berakhir = $_POST['berakhir'];
 
                 $update = mysqli_query($conn, "UPDATE promosi SET
-                           promo = '$promo',
+                           promo_lama = '$promo_lama',
+                           promo_baru = '$promo_baru',
                            mulai = '$mulai',
                            berakhir = '$berakhir'
                            WHERE id_promosi_produk = '$id_promosi'");

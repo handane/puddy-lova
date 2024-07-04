@@ -20,13 +20,16 @@ $status_user = $_SESSION['user']['status'];
         $p = mysqli_fetch_array($produk);
 
         if($status_user == 'Pelanggan Lama'){
-            $promo = $p['promo'] / 100;
+            $promo = $p['promo_lama'] / 100;
             $harga_promo = $p['harga'] * $promo;
             $harga_baru = $p['harga'] - $harga_promo;
             $total = $harga_baru * $jumlah;
             $frekuensi = 0;
         }if($status_user == 'Pelanggan Baru'){
-            $total = $p['harga'] * $jumlah;
+            $promo = $p['promo_baru'] / 100;
+            $harga_promo = $p['harga'] * $promo;
+            $harga_baru = $p['harga'] - $harga_promo;
+            $total = $harga_baru * $jumlah;
             $frekuensi = 0;
         }
 

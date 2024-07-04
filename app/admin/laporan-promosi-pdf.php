@@ -54,7 +54,8 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
               <tr style="font-size: 16px;">
               <th>No</th>
               <th>Produk</th>
-              <th>Promo</th>
+              <th>Promo Pelanggan Lama</th>
+              <th>Promo Pelanggan Baru</th>
               <th>Tanggal Mulai</th>
               <th>Tanggal Berakhir</th>
               </tr>
@@ -62,13 +63,14 @@ $tgl_finish_formated = date('d-m-Y', strtotime($tgl_finish));
             <tbody>
                 <?php
                   $no = 1;
-                  $produk = mysqli_query($conn, "SELECT * FROM promosi LEFT JOIN produk ON promosi.id_produk = produk.id_produk WHERE promosi.mulai BETWEEN '$tgl_start' AND '$tgl_finish' AND promosi.promo > 0 ORDER BY mulai ASC");
+                  $produk = mysqli_query($conn, "SELECT * FROM promosi LEFT JOIN produk ON promosi.id_produk = produk.id_produk WHERE promosi.mulai BETWEEN '$tgl_start' AND '$tgl_finish' AND promosi.promo_lama > 0 || promosi.promo_baru > 0 ORDER BY mulai ASC");
                   while ($p = mysqli_fetch_array($produk)) {
                   ?>
                 <tr style="font-size: 16px;" id="klik-tabel">
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $p['nama_produk']; ?></td>
-                    <td><?php echo $p['promo']; ?>%</td>
+                    <td><?php echo $p['promo_lama']; ?>%</td>
+                    <td><?php echo $p['promo_baru']; ?>%</td>
                     <td><?php echo $p['mulai']; ?></td>
                     <td><?php echo $p['berakhir']; ?></td>
                 </tr>

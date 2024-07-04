@@ -90,7 +90,11 @@ $status_pelanggan = $_SESSION['user']['status'];
 
 									<?php if($status_pelanggan == "Pelanggan Lama"){ ?>
 										<th class="product-quantity">Promo(%)</th>
-									<?php }else{} ?>
+									<?php }else{
+										?>
+										<th class="product-quantity">Promo(%)</th>
+										<?php 
+									} ?>
 									<th class="product-quantity">Jumlah</th>
 									<th class="product-total">Total</th>
 								</tr>
@@ -110,11 +114,13 @@ $status_pelanggan = $_SESSION['user']['status'];
 									<td class="product-price">Rp. <?php echo number_format($p['harga']) ?></td>
 
 									<?php if($status_pelanggan == 'Pelanggan Lama'){ ?>
-									<td class="product-price">
-											<?php echo $p['promo'] ?>%
-									</td>
+										<td class="product-price">
+											<?php echo $p['promo_lama'] ?>%
+										</td>
 									<?php }else{ ?>
-										
+										<td class="product-price">
+											<?php echo $p['promo_baru'] ?>%
+										</td>
 									<?php } ?>
 									<td class="product-quantity"><?php echo $p['jumlah'] ?><input type="hidden" name="jumlah" value="<?php echo $p['jumlah'] ?>"></td>
 									<td class="product-total">Rp <?php echo number_format($p['total']) ?></td>
