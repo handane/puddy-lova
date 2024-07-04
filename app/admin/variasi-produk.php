@@ -51,6 +51,7 @@ if (!isset($_SESSION["admin"])) {
                       <label for="" class="mt-3">Gambar</label>
                       <input type="file" class="form-control" id="recipient-name" autocomplete="off" name="foto">
                       <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="harga" placeholder="Harga">
+                      <textarea name="deskripsi" class="mt-3 form-control" id="" cols="20" rows="5" placeholder="Deskripsi"></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -73,6 +74,7 @@ if (!isset($_SESSION["admin"])) {
                   $id_produk = generateRandomText();
                   $nama_produk = $_POST['nama_produk'];
                   $harga = $_POST['harga'];
+                  $deskripsi = $_POST['deskripsi'];
                   $stok_produk = 0;
 
                   $filename1 = $_FILES['foto']['name'];
@@ -92,7 +94,8 @@ if (!isset($_SESSION["admin"])) {
                                 '" . $nama_produk . "',
                                 '" . $newname1 . "',
                                 '" . $harga . "',
-                                '" . $stok_produk . "'
+                                '" . $stok_produk . "',
+                                '" . $deskripsi . "'
                             )");
 
                     $get_produk = mysqli_query($conn, "SELECT * FROM produk");
@@ -128,6 +131,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Produk</th>
                     <th>Gambar</th>
                     <th>Harga</th>
+                    <th>Deskripsi</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -142,6 +146,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['nama_produk']; ?></td>
                       <td><img src="./foto/<?= $p['gambar'] ?>" width="100px" alt=""></td>
                       <td><?php echo $p['harga']; ?></td>
+                      <td><?php echo $p['deskripsi']; ?></td>
                       <td>
                         <a class="btn btn-sm btn-success" href="edit-variasi-produk.php?id_produk=<?php echo $p['id_produk'] ?>">Edit</a>
                         <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus data?')" href="delete.php?id_produk=<?php echo $p['id_produk'] ?>">Delete</a>

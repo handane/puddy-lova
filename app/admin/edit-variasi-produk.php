@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 include("../database/db.php");
 if (!isset($_SESSION["admin"])) {
   echo "<script>location='../index.php'</script>";
@@ -53,10 +54,11 @@ if (!isset($_SESSION["admin"])) {
                         <label for="" class="form-label-md"><b>harga</b></label>
                         <input type="text" class="form-control" name="harga" value="<?php echo $row['harga'] ?>" />
                       </div>
-                      <!-- <div class="col-md-6">
-                        <label for="" class="form-label-md"><b>stok</b></label>
-                        <input type="text" class="form-control" name="stok_produk" value="<?php echo $row['stok_produk'] ?>" />
-                      </div> -->
+                      <div class="col-md-6">
+                        <label for="" class="form-label-md"><b>Deskripsi</b></label>
+                        <textarea name="deskripsi" class="form-control" id="" cols="20" rows="5"><?php echo $row['deskripsi'] ?>
+                        </textarea>
+                      </div>
                       <div class="col-md-6">
                         <label for="" class="form-label-md"><b>Gambar</b></label>
                         <input type="file" class="form-control" name="foto" required />
@@ -72,6 +74,7 @@ if (!isset($_SESSION["admin"])) {
                 $nama_produk = $_POST['nama_produk'];
                 $harga = $_POST['harga'];
                 $stok_produk = $_POST['stok_produk'];
+                $deskripsi = $_POST['deskripsi'];
 
                 $filename1 = $_FILES['foto']['name'];
                 $tmp_name1 = $_FILES['foto']['tmp_name'];
@@ -87,7 +90,8 @@ if (!isset($_SESSION["admin"])) {
                 $update = mysqli_query($conn, "UPDATE produk SET
                            nama_produk = '$nama_produk',
                            gambar = '$newname1',
-                           harga = '$harga'
+                           harga = '$harga',
+                           deskripsi = '$deskripsi'
                            WHERE id_produk = '$id_produk'");
                 if ($update) {
               ?>

@@ -90,7 +90,9 @@ $p = mysqli_fetch_array($produk);
 							<div class="single-product-form">
 								<p><strong>Promo: </strong><?php echo $p['promo'] ?>%</p>
 								<p><strong>Stok: </strong><?php echo $p['stok_produk'] ?></p>
-								<p><strong>Jumlah</strong></p>
+								<p class="mb-1"><strong>Deskripsi Produk</strong></p>
+								<p style="text-align: justify;"><?php echo $p['deskripsi'] ?></p>
+								<p><strong>Jumlah Beli</strong></p>
 								<input type="number" name="jumlah" value="1">
 							</div>
 							<h4></h4>
