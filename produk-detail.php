@@ -4,6 +4,7 @@ include("./app/database/db.php");
 if (!isset($_SESSION["user"])) {
   echo "<script>location='./login.php'</script>";
 } 
+$status_user = $_SESSION['user']['status'];
 $id_user = $_SESSION["user"]['id_user'];
 $id_produk = $_GET['id_produk'];
 $produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.id_produk = '$id_produk'");
@@ -88,7 +89,12 @@ $p = mysqli_fetch_array($produk);
 							<p class="single-product-pricing"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
 							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p> -->
 							<div class="single-product-form">
+								<?php 
+								if($status_user == 'Pelanggan Baru'){}
+								if($status_user == 'Pelanggan Lama'){ ?>
 								<p><strong>Promo: </strong><?php echo $p['promo'] ?>%</p>
+								<?php } ?>
+								
 								<p><strong>Stok: </strong><?php echo $p['stok_produk'] ?></p>
 								<p class="mb-1"><strong>Deskripsi Produk</strong></p>
 								<p style="text-align: justify;"><?php echo $p['deskripsi'] ?></p>

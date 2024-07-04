@@ -49,6 +49,7 @@
                         <a class="nav-link" href="laporan-penjualan.php">Penjualan</a>
                         <a class="nav-link" href="laporan-promosi.php">Promosi Produk</a>
                         <a class="nav-link" href="laporan-kritik.php">Kritik Saran</a>
+                        <a class="nav-link" href="laporan-frekuensi.php">Frekuensi Pelanggan</a>
                      </nav>
                   </div>
                   <a class="nav-link" href="logout.php">

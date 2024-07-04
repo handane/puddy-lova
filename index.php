@@ -1,7 +1,6 @@
 <?php 
 session_start();
 require('./app/database/db.php');
-$status_user = $_SESSION['user']['status'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,6 +93,7 @@ $status_user = $_SESSION['user']['status'];
 
 			<div class="row">
 			<?php 
+				$status_user = $_SESSION['user']['status'];
 				$produk = mysqli_query($conn, "SELECT * FROM produk LEFT JOIN promosi ON produk.id_produk = promosi.id_produk WHERE produk.stok_produk > 0 LIMIT 3");
 				while ($p = mysqli_fetch_array($produk)) {
 			?>
