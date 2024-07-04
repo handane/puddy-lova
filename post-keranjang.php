@@ -26,7 +26,7 @@ $status_user = $_SESSION['user']['status'];
             $total = $harga_baru * $jumlah;
             $frekuensi = 0;
         }if($status_user == 'Pelanggan Baru'){
-            $total = $p['harga'];
+            $total = $p['harga'] * $jumlah;
             $frekuensi = 0;
         }
 
