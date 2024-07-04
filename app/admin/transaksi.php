@@ -102,7 +102,12 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['riwayat']; ?></td>
                       <td><img src="./../../foto/<?= $p['bukti_transfer'] ?>" height="60px" alt="" onClick="openOverlay(this)"></td>
                       <td>
-                        <?php if($p['riwayat'] == 'Pembayaran Diterima') {}else{ ?>
+                        <?php 
+                          if($p['riwayat'] == 'Pembayaran Diterima') {
+                          echo 'Selesai';
+                          } if($p['riwayat'] == 'Bukti Transfer Ditolak') {
+                            echo 'Ditolak';
+                          } if($p['riwayat'] == 'sudah bayar') { ?>
                       <a href="terima.php?id_keranjang_transaksi=<?php echo $p['id_keranjang']?>&&id_user=<?= $p['id_user'] ?>" class="btn btn-sm btn-success" onclick="return confirm('apakah anda yakin ingin pelanggan sudah membayar?')">Terima</a>
                       <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menolak bukti transfer?')" href="delete.php?id_keranjang_transaksi=<?php echo $p['id_keranjang'] ?>">Tolak</a>
                       <?php } ?>

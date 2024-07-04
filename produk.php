@@ -90,13 +90,15 @@ $status_user = $_SESSION['user']['status'];
 						</div>
 						<h3><?php echo $p['nama_produk'] ?></h3>
 							<p class="product-price"><span>Rp <?php echo number_format($p['harga']) ?></span></p>
-							<?php if($p['promo_lama'] > 0 || $p['promo_baru'] > 0 ){ ?>
+							<?php if($p['promo_lama'] > 0 ){ ?>
 								<?php if($status_user == 'Pelanggan Lama'){ ?>
 									<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo_lama'] ?>%</span></p>
-								<?php }if($status_user == 'Pelanggan Baru'){ ?>
+								<?php }} ?>
+							<?php if($p['promo_baru'] > 0){ 
+								if($status_user == 'Pelanggan Baru'){ ?>
 									<p class="product-price"><span style="color: tomato;">Diskon <?php echo $p['promo_baru'] ?>%</span></p>	
-								<?php } ?>
-							<?php }if($p['promo_lama'] == 0 || $p['promo_baru'] == 0){ ?>
+								<?php }} ?>
+							<?php if($p['promo_lama'] == 0 || $p['promo_baru'] == 0){ ?>
 							<p class="product-price"><span <span style="color: #fff;">x</span></p>
 							<?php } ?>
 						<a href="produk-detail.php?id_produk=<?= $p['id_produk']?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Detail</a>
